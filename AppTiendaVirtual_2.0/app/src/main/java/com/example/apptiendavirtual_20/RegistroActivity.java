@@ -7,12 +7,20 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.apptiendavirtual_20.BaseDeDatos.BaseDatos_TiendaVirtual;
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import java.util.ArrayList;
 
@@ -21,6 +29,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
     private BaseDatos_TiendaVirtual BaseDatos;
     private SQLiteDatabase operacionesBD;
     private EditText tvNombre, tvApellidos, tvCelular, tvCorreo, tvUsuario, tvContra;
+    public static final String url_base ="http://192.168.1.24:8190/WS_TiendaVirtual/prueba/go/";
+    public static final String url_base2 ="http://192.168.1.23:8093/usuario";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +57,38 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
         switch (v.getId())
         {
             case R.id.btnRegistrarse:{
-                String nombre = tvNombre.getText().toString();
+
+                System.out.println("------------------");
+                System.out.println("");
+                System.out.println("Creación de empleado");
+               /* Usuarios registro=new Usuarios("a1715389","75440415","Jahir","San Roman Moriano","932132988","jhairsanroman@yahoo.com");
+                registro=crear(registro);*/
+                Usuario regis = new Usuario("Nayha","Roman Guerreros","991697521"
+                        ,"Nroman","Cercado de Lima");
+                regis = save(regis);
+
+
+
+               /* System.out.println("ID: "+registro.getIdUsuario());
+                System.out.println("Usuario: "+registro.getUsuario());
+                System.out.println("Contraseña: "+registro.getContra());
+                System.out.println("Nombres: "+registro.getNombres());
+                System.out.println("Apellidos: "+registro.getApellidos());
+                System.out.println("Celular: "+registro.getCelular());
+                System.out.println("Correo: "+registro.getCorreo());*/
+
+                System.out.println("ID: "+regis.getId());
+                System.out.println("Nombres: "+regis.getNombres());
+                System.out.println("Apellidos: "+regis.getApellidos());
+                System.out.println("Celular: "+regis.getCelular());
+                System.out.println("Clave: "+regis.getClave());
+                System.out.println("Dirección: "+regis.getDireccion());
+
+
+
+
+
+               /* String nombre = tvNombre.getText().toString();
                 String apellidos = tvApellidos.getText().toString();
                 String celular = tvCelular.getText().toString();
                 String correo = tvCorreo.getText().toString();
@@ -96,8 +137,96 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                                 ,Toast.LENGTH_LONG).show();
                         startActivity(intent);
                     }
-                }
+                }*/
             }break;
         }
     }
+    public static Usuario save (Usuario user)
+    {
+        try {
+
+            URL url = new URL(url_base2);
+            HttpURLConnection conn= (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type","application/json");
+            conn.setDoOutput(true);
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            Gson g = new Gson();
+            String input = g.toJson(user,Usuario.class);
+
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+
+            if(conn.getResponseCode() !=200)
+            {
+                throw new RuntimeException("Error de Conexion"+conn.getResponseCode());
+            }
+
+            BufferedReader tecla2 = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            StringBuilder respuesta = new StringBuilder();
+
+            String out;
+
+            while((out=tecla2.readLine())!=null)
+            {
+                respuesta.append(out);
+            }
+
+            user=g.fromJson(respuesta.toString(),Usuario.class);
+            conn.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    public static Usuarios crear (Usuarios usuario)
+    {
+        try {
+
+            URL url = new URL(url_base+"crear");
+            HttpURLConnection conn= (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type","application/json");
+            conn.setDoOutput(true);
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            Gson g = new Gson();
+            String input = g.toJson(usuario,Usuarios.class);
+
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+
+            if(conn.getResponseCode() !=200)
+            {
+                throw new RuntimeException("Error de Conexion"+conn.getResponseCode());
+            }
+
+            BufferedReader tecla2 = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            StringBuilder respuesta = new StringBuilder();
+
+            String out;
+
+            while((out=tecla2.readLine())!=null)
+            {
+                respuesta.append(out);
+            }
+
+            usuario=g.fromJson(respuesta.toString(),Usuarios.class);
+            conn.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return usuario;
+    }
+
 }
