@@ -30,6 +30,11 @@ public class DetallePedido{
         this.cantidad = cantidad;
         this.costo = costo;
     }
+    public DetallePedido(Producto producto, int cantidad, double costo) {
+        this.producto = producto;
+        this.cantidad = cantidad;
+        this.costo = costo;
+    }
 
     public Pedido getPedido() {
         return pedido;

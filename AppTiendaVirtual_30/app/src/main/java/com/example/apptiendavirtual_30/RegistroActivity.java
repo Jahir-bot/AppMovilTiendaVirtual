@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.apptiendavirtual_30.model.Mensajes;
 import com.example.apptiendavirtual_30.model.URI;
 import com.example.apptiendavirtual_30.model.Usuario;
 import com.google.gson.Gson;
@@ -25,7 +26,7 @@ import java.util.regex.Pattern;
 public class RegistroActivity extends AppCompatActivity implements View.OnClickListener{
     private EditText txtNombre, txtApellido, txtCelular, txtContraRegistro, txtDireccion;
     private Button btnRegistro;
-    public static final String url_base ="/usuario";
+    public static final String url_base ="/user";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,22 +78,30 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                             String contraseña = txtContraRegistro.getText().toString();
                             String direccion = txtDireccion.getText().toString();
 
-                            Usuario registro = new Usuario(nombres,apellidos,celular,contraseña,direccion);
-                            registro = save(registro);
+                            Usuario registro = new Usuario(nombres,apellidos,celular,contraseña,direccion,"Cliente");
+                            Mensajes mensajes = save(registro);
 
-                            Toast.makeText(this,registro.getMessage(),Toast.LENGTH_LONG).show();
-                            startActivity(new Intent(this,LoginActivity.class));
+                            if(mensajes.isRequestSuccess()==true)
+                            {
+                                Toast.makeText(this,mensajes.getMessage(),Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(this,LoginActivity.class));
+                            }else
+                            {
+                                Toast.makeText(this,mensajes.getMessage(),Toast.LENGTH_LONG).show();
+                                txtCelular.setText("");
+                            }
+
                         }
                     }
-
-
                 }
             }break;
         }
     }
 
-    public static Usuario save(Usuario user)
+    public static Mensajes save(Usuario user)
     {
+        Mensajes mensajes = new Mensajes();
+
         try {
             URI uri = new URI();
             URL url = new URL(uri.getUrl()+url_base);
@@ -126,12 +135,12 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                 respuesta.append(out);
             }
 
-            user=g.fromJson(respuesta.toString(),Usuario.class);
+            mensajes =g.fromJson(respuesta.toString(), Mensajes.class);
             conn.disconnect();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return user;
+        return mensajes;
     }
 }

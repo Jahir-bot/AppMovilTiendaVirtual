@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "3a35b486-013c-4ada-84f9-8b553b8aa798",
+		"name": "Sistema rapida",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Iniciar sesion",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/login?phone=984686534&password=abc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "phone",
+							"value": "984686534"
+						},
+						{
+							"key": "password",
+							"value": "abc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Raphael\",\r\n    \"lastname\": \"Roman Guerreros\" ,\r\n    \"address\" : \"Cercado de lima\",\r\n    \"phone\" : \"984686534\",\r\n    \"password\" : \"abC\",\r\n    \"typeUser\" : \"Bodeguero\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/user/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"paymentType\": \"Efectivo\",\r\n    \"dateEmision\": \"2020-07-23\" ,\r\n    \"nameBanco\" : \"BCP\",\r\n    \"codeVoucher\" : \"VOU-123124124\",\r\n    \"state\" : \"Listo para recoger\",\r\n    \"total\" : 110,\r\n    \"subtotal\" : 100,\r\n    \"igv\" : 10,\r\n    \"user\" : {\r\n        \"id\" : \"1\"\r\n    },\r\n    \"details\" : [\r\n        {\r\n            \"product\" : {\r\n                \"id\": 1\r\n            },\r\n            \"cant\": 10,\r\n            \"cost\" : 10.0\r\n        },\r\n        {\r\n            \"product\" : {\r\n                \"id\": 2\r\n            },\r\n            \"cant\": 3,\r\n            \"cost\" : 3.0\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/order/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Producto por Stock menor que",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/stock_low?numberMin=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"stock_low"
+					],
+					"query": [
+						{
+							"key": "numberMin",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar detalle de producto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/detail?id=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"detail"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Pedidos por Estado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/order/find?state=Pendiente",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"find"
+					],
+					"query": [
+						{
+							"key": "state",
+							"value": "Pendiente"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Detalle del Pedido",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/order/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"order",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

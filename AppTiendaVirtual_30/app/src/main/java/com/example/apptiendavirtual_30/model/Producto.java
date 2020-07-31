@@ -1,6 +1,9 @@
 package com.example.apptiendavirtual_30.model;
 
-public class Producto {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Producto implements Parcelable {
 
     private int id;
     private String nombre;
@@ -9,6 +12,21 @@ public class Producto {
     private int stock;
     private String descripcion;
     private String enlaceImagen;
+
+    public Producto(String nombre, double costoUnitario, int stock, String enlaceImagen) {
+        this.nombre = nombre;
+        this.costoUnitario = costoUnitario;
+        this.stock = stock;
+        this.enlaceImagen = enlaceImagen;
+    }
+
+
+    public Producto(String nombre, double costoUnitario, String enlaceImagen)
+    {
+        this.nombre = nombre;
+        this.costoUnitario = costoUnitario;
+        this.enlaceImagen = enlaceImagen;
+    }
 
     public Producto()
     {
@@ -32,6 +50,28 @@ public class Producto {
         this.descripcion = descripcion;
         this.enlaceImagen = enlaceImagen;
     }
+
+    protected Producto(Parcel in) {
+        id = in.readInt();
+        nombre = in.readString();
+        categoria = in.readString();
+        costoUnitario = in.readDouble();
+        stock = in.readInt();
+        descripcion = in.readString();
+        enlaceImagen = in.readString();
+    }
+
+    public static final Creator<Producto> CREATOR = new Creator<Producto>() {
+        @Override
+        public Producto createFromParcel(Parcel in) {
+            return new Producto(in);
+        }
+
+        @Override
+        public Producto[] newArray(int size) {
+            return new Producto[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -87,5 +127,22 @@ public class Producto {
 
     public void setEnlaceImagen(String enlaceImagen) {
         this.enlaceImagen = enlaceImagen;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
+        dest.writeInt(id);
+        dest.writeString(nombre);
+        dest.writeString(categoria);
+        dest.writeDouble(costoUnitario);
+        dest.writeInt(stock);
+        dest.writeString(descripcion);
+        dest.writeString(enlaceImagen);
     }
 }

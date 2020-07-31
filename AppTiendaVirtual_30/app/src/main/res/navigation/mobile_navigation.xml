@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@id/stockFragment">
-    <fragment
-        android:id="@+id/detallePedidoFragment"
-        android:name="com.example.apptiendavirtual_30.fragments.DetallePedidoFragment"
-        android:label="Detalle de Pedido"
-        tools:layout="@layout/fragment_detalle_pedido" />
+    app:startDestination="@id/catalogoFragment">
     <fragment
         android:id="@+id/stockFragment"
         android:name="com.example.apptiendavirtual_30.fragments.StockFragment"
         android:label="Stock"
         tools:layout="@layout/fragment_stock" />
     <fragment
+        android:id="@+id/catalogoFragment"
+        android:name="com.example.apptiendavirtual_30.fragments.CatalogoFragment"
+        android:label="Catalogo"
+        tools:layout="@layout/fragment_catalogo" />
+    <fragment
         android:id="@+id/pedidosFragment"
         android:name="com.example.apptiendavirtual_30.fragments.PedidosFragment"
-        android:label="Pedidos"
+        android:label="Lista de Pedidos"
         tools:layout="@layout/fragment_pedidos" />
 </navigation>

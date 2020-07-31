@@ -2,91 +2,88 @@ package com.example.apptiendavirtual_30.model;
 
 public class Usuario {
 
-    private int id;
-    private String nombres;
-    private String apellidos;
-    private String celular;
-    private String clave;
-    private String direccion;
-    private String message;
-    public String getMessage() {
-        return message;
+    private Integer id;
+    private String name;
+    private String lastname;
+    private String phone;
+    private String password;
+    private String address;
+    private String typeUser;
+
+    public Usuario(String name, String lastname, String phone, String password, String address, String typeUser) {
+        this.name = name;
+        this.lastname = lastname;
+        this.phone = phone;
+        this.password = password;
+        this.address = address;
+        this.typeUser = typeUser;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public Usuario(String phone, String password) {
+        this.phone = phone;
+        this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nombres='" + nombres + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", celular='" + celular + '\'' +
-                ", clave='" + clave + '\'' +
-                ", direccion='" + direccion + '\'' +
-                '}';
+    public Integer getId() {
+        return id;
     }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTypeUser() {
+        return typeUser;
+    }
+
+    public void setTypeUser(String typeUser) {
+        this.typeUser = typeUser;
+    }
+
 
     public Usuario()
     {
 
     }
 
-    public Usuario(String nombres, String apellidos, String celular, String clave, String direccion) {
-        this.nombres = nombres;
-        this.apellidos = apellidos;
-        this.celular = celular;
-        this.clave = clave;
-        this.direccion = direccion;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
-    }
-
-    public String getClave() {
-        return clave;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
 }
