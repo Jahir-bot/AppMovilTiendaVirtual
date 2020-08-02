@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -63,7 +64,7 @@ public class CarritoActivity extends AppCompatActivity {
         for (int i = 0; i < jsonArray.size(); i++) {
             // desconvertir a mi clase DetallePedido
             detallePedido = gson.fromJson( jsonArray.get(i) , DetallePedido.class);
-            total +=detallePedido.getCantidad()*detallePedido.getCosto();
+            total +=detallePedido.getCant()*detallePedido.getCost();
             listDetallePedidos.add( detallePedido );
         }
 
@@ -81,6 +82,7 @@ public class CarritoActivity extends AppCompatActivity {
             btnCompra.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    startActivity(new Intent(v.getContext(),FormaPagoActivity.class));
                 }
             });
     }

@@ -88,7 +88,9 @@ public class CatalogoFragment extends Fragment {
                                 {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
                                     lstProducto.add(new Producto(
+                                            jsonObject.getInt("id"),
                                             jsonObject.getString("name"),
+                                            jsonObject.getString("category"),
                                             jsonObject.getDouble("unitCost"),
                                             jsonObject.getInt("stock"),
                                             jsonObject.getString("imageLink")

@@ -3,6 +3,8 @@ package com.example.apptiendavirtual_30.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
+
 public class Producto implements Parcelable {
 
     private int id;
@@ -13,13 +15,15 @@ public class Producto implements Parcelable {
     private String descripcion;
     private String enlaceImagen;
 
-    public Producto(String nombre, double costoUnitario, int stock, String enlaceImagen) {
+    public Producto(int id, String nombre, String categoria, double costoUnitario, int stock, String enlaceImagen)
+    {
+        this.id = id;
         this.nombre = nombre;
+        this.categoria = categoria;
         this.costoUnitario = costoUnitario;
         this.stock = stock;
         this.enlaceImagen = enlaceImagen;
     }
-
 
     public Producto(String nombre, double costoUnitario, String enlaceImagen)
     {

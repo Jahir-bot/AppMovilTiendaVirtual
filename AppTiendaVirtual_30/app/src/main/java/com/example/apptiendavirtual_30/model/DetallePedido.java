@@ -1,70 +1,69 @@
 package com.example.apptiendavirtual_30.model;
 
-public class DetallePedido{
+import java.io.Serializable;
+
+public class DetallePedido implements Serializable {
 
     private int id;
-    private Pedido pedido;
-    private Producto producto;
-    private int cantidad;
-    private double costo;
+    private Pedido order;
+    private Producto product;
+    private int cant;
+    private double cost;
 
-    @Override
-    public String toString() {
-        return "DetallePedido{" +
-                "id=" + id +
-                ", pedido=" + pedido +
-                ", producto=" + producto +
-                ", cantidad=" + cantidad +
-                ", costo=" + costo +
-                '}';
+    public DetallePedido(Producto product, int cant, double cost) {
+        this.product = product;
+        this.cant = cant;
+        this.cost = cost;
     }
 
+    public DetallePedido(Pedido order, Producto product, int cant, double cost) {
+        this.order = order;
+        this.product = product;
+        this.cant = cant;
+        this.cost = cost;
+    }
     public DetallePedido()
     {
 
     }
 
-    public DetallePedido(Pedido pedido, Producto producto, int cantidad, double costo) {
-        this.pedido = pedido;
-        this.producto = producto;
-        this.cantidad = cantidad;
-        this.costo = costo;
-    }
-    public DetallePedido(Producto producto, int cantidad, double costo) {
-        this.producto = producto;
-        this.cantidad = cantidad;
-        this.costo = costo;
+    public int getId() {
+        return id;
     }
 
-    public Pedido getPedido() {
-        return pedido;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public Pedido getOrder() {
+        return order;
     }
 
-    public Producto getProducto() {
-        return producto;
+    public void setOrder(Pedido order) {
+        this.order = order;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
+    public Producto getProduct() {
+        return product;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public void setProduct(Producto product) {
+        this.product = product;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public int getCant() {
+        return cant;
     }
 
-    public double getCosto() {
-        return costo;
+    public void setCant(int cant) {
+        this.cant = cant;
     }
 
-    public void setCosto(double costo) {
-        this.costo = costo;
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 }

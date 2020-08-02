@@ -31,6 +31,8 @@ public class DetalleCatalogoActivity extends AppCompatActivity implements View.O
     private TextView txtProducto, txtPrecio, txtCantidad, txtDetaIncrement;
     private Button btnDetaMenos, btnDetaMas, btnAnadirCarrito, btnCancelar;
     private ImageView imgProducto;
+    private int id, stock;
+    private String category;
     Producto producto = new Producto();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,9 @@ public class DetalleCatalogoActivity extends AppCompatActivity implements View.O
             txtPrecio.setText("Precio:   S/ "+String.valueOf(producto.getCostoUnitario()));
             txtCantidad.setText("Cantidad: "+String.valueOf(producto.getStock())+" unds");
             txtDetaIncrement.setText("1");
+            id = producto.getId();
+            category = producto.getCategoria();
+            stock = producto.getStock();
         }
     }
 
@@ -124,7 +129,9 @@ public class DetalleCatalogoActivity extends AppCompatActivity implements View.O
                             .substring(txtPrecio.getText().toString().indexOf("/")+1));
                     double precio = Double.parseDouble(txtPrecio.getText().toString()
                             .substring(txtPrecio.getText().toString().indexOf("/")+1));
-                    Producto producto = new Producto(nombre,precio,url);
+
+
+                    Producto producto = new Producto(id,nombre,category,precio,stock,url);
 
                     DetallePedido detaPedido = new DetallePedido(producto,cantidadPedido,precio);
 

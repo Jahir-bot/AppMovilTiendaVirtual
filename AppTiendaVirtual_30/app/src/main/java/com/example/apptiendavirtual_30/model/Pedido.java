@@ -1,53 +1,58 @@
 package com.example.apptiendavirtual_30.model;
 
-import java.util.Date;
+import android.app.PendingIntent;
 
-public class Pedido {
+import java.io.Serializable;
+import java.util.List;
+
+public class Pedido implements Serializable {
 
     private int id;
-    private String tipoPago;
-    private Date fechaEmisión;
-    private String nombreBanco;
-    private String codigoVoucher;
-    private String estado;
+    private String paymentType;
+    private String dateEmision;
+    private String nameBanco;
+    private String codeVoucher;
+    private String state;
     private double total;
-    private double subTotal;
+    private double subtotal;
     private double igv;
-    private Usuario usuario;
+    private Usuario user;
+    private List<DetallePedido> details;
 
-    @Override
-    public String toString() {
-        return "Pedido{" +
-                "id=" + id +
-                ", tipoPago='" + tipoPago + '\'' +
-                ", fechaEmisión=" + fechaEmisión +
-                ", nombreBanco='" + nombreBanco + '\'' +
-                ", codigoVoucher='" + codigoVoucher + '\'' +
-                ", estado='" + estado + '\'' +
-                ", total=" + total +
-                ", subTotal=" + subTotal +
-                ", igv=" + igv +
-                ", usuario=" + usuario +
-                '}';
+    public Pedido(String paymentType, String dateEmision, String nameBanco, String codeVoucher,
+                  String state, double total, double subtotal, double igv,
+                  Usuario user, List<DetallePedido> details) {
+        this.paymentType = paymentType;
+        this.dateEmision = dateEmision;
+        this.nameBanco = nameBanco;
+        this.codeVoucher = codeVoucher;
+        this.state = state;
+        this.total = total;
+        this.subtotal = subtotal;
+        this.igv = igv;
+        this.user = user;
+        this.details = details;
+    }
+
+    public List<DetallePedido> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<DetallePedido> details) {
+        this.details = details;
+    }
+
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
     }
 
     public Pedido()
     {
 
-    }
-
-    public Pedido(String tipoPago, Date fechaEmisión, String nombreBanco,
-                  String codigoVoucher, String estado, double total,
-                  double subTotal, double igv, Usuario usuario) {
-        this.tipoPago = tipoPago;
-        this.fechaEmisión = fechaEmisión;
-        this.nombreBanco = nombreBanco;
-        this.codigoVoucher = codigoVoucher;
-        this.estado = estado;
-        this.total = total;
-        this.subTotal = subTotal;
-        this.igv = igv;
-        this.usuario = usuario;
     }
 
     public int getId() {
@@ -58,44 +63,44 @@ public class Pedido {
         this.id = id;
     }
 
-    public String getTipoPago() {
-        return tipoPago;
+    public String getPaymentType() {
+        return paymentType;
     }
 
-    public void setTipoPago(String tipoPago) {
-        this.tipoPago = tipoPago;
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
     }
 
-    public Date getFechaEmisión() {
-        return fechaEmisión;
+    public String getDateEmision() {
+        return dateEmision;
     }
 
-    public void setFechaEmisión(Date fechaEmisión) {
-        this.fechaEmisión = fechaEmisión;
+    public void setDateEmision(String dateEmision) {
+        this.dateEmision = dateEmision;
     }
 
-    public String getNombreBanco() {
-        return nombreBanco;
+    public String getNameBanco() {
+        return nameBanco;
     }
 
-    public void setNombreBanco(String nombreBanco) {
-        this.nombreBanco = nombreBanco;
+    public void setNameBanco(String nameBanco) {
+        this.nameBanco = nameBanco;
     }
 
-    public String getCodigoVoucher() {
-        return codigoVoucher;
+    public String getCodeVoucher() {
+        return codeVoucher;
     }
 
-    public void setCodigoVoucher(String codigoVoucher) {
-        this.codigoVoucher = codigoVoucher;
+    public void setCodeVoucher(String codeVoucher) {
+        this.codeVoucher = codeVoucher;
     }
 
-    public String getEstado() {
-        return estado;
+    public String getState() {
+        return state;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public double getTotal() {
@@ -106,12 +111,12 @@ public class Pedido {
         this.total = total;
     }
 
-    public double getSubTotal() {
-        return subTotal;
+    public double getSubtotal() {
+        return subtotal;
     }
 
-    public void setSubTotal(double subTotal) {
-        this.subTotal = subTotal;
+    public void setSubtotal(double subtotal) {
+        this.subtotal = subtotal;
     }
 
     public double getIgv() {
@@ -120,13 +125,5 @@ public class Pedido {
 
     public void setIgv(double igv) {
         this.igv = igv;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 }

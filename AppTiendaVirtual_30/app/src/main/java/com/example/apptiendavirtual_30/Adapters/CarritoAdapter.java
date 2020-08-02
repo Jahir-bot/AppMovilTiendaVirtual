@@ -49,10 +49,10 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull CarritoAdapter.ViewHolder holder, final int position) {
         final DetallePedido detallePedido = listDetallePedido.get(position);
-        holder.txtProducto.setText(detallePedido.getProducto().getNombre());
-        holder.txtUnidades.setText(String.valueOf(detallePedido.getCantidad()));
-        holder.txtCosto.setText(String.valueOf(detallePedido.getCantidad()*detallePedido.getCosto()));
-        Picasso.get().load(detallePedido.getProducto().getEnlaceImagen()).into(holder.imgProducto);
+        holder.txtProducto.setText(detallePedido.getProduct().getNombre());
+        holder.txtUnidades.setText(String.valueOf(detallePedido.getCant()));
+        holder.txtCosto.setText(String.valueOf(detallePedido.getCant()*detallePedido.getCost()));
+        Picasso.get().load(detallePedido.getProduct().getEnlaceImagen()).into(holder.imgProducto);
         holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

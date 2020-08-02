@@ -10,6 +10,11 @@ public class Usuario {
     private String address;
     private String typeUser;
 
+    public Usuario(int id)
+    {
+        this.id = id;
+    }
+
     public Usuario(String name, String lastname, String phone, String password, String address, String typeUser) {
         this.name = name;
         this.lastname = lastname;

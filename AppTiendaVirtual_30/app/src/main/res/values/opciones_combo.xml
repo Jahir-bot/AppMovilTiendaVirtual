@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="combo_metodoPago">
+        <item>Seleccione:</item>
+        <item>Transferencia</item>
+        <item>Efectivo</item>
+        <item>Fiadito</item>
+    </string-array>
+
+    <string-array name="combo_bancos">
+        <item>Seleccione:</item>
+        <item>BANCO DE CRÉDITO</item>
+        <item>BANCO CONTINENTAL BBVA</item>
+        <item>INTERBANK</item>
+    </string-array>
+</resources>
