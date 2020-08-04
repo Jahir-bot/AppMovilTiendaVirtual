@@ -83,6 +83,7 @@ public class CarritoActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(v.getContext(),FormaPagoActivity.class));
+                    finish();
                 }
             });
     }

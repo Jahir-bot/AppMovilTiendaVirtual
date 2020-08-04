@@ -10,6 +10,10 @@ public class Usuario {
     private String address;
     private String typeUser;
 
+    public Usuario(String name)
+    {
+        this.name = name;
+    }
     public Usuario(int id)
     {
         this.id = id;
@@ -91,4 +95,16 @@ public class Usuario {
 
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", phone='" + phone + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                ", typeUser='" + typeUser + '\'' +
+                '}';
+    }
 }

@@ -4,7 +4,6 @@
         <item>Seleccione:</item>
         <item>Transferencia</item>
         <item>Efectivo</item>
-        <item>Fiadito</item>
     </string-array>
 
     <string-array name="combo_bancos">
@@ -12,5 +11,17 @@
         <item>BANCO DE CRÉDITO</item>
         <item>BANCO CONTINENTAL BBVA</item>
         <item>INTERBANK</item>
+    </string-array>
+    <string-array name="combo_categoriaProducto">
+        <item>Todos</item>
+        <item>Desayuno</item>
+        <item>Lacteos</item>
+        <item>Abarrotes</item>
+    </string-array>
+    <string-array name="combo_estatoPedido">
+        <item>Pendiente</item>
+        <item>Confirmado</item>
+        <item>Preparando</item>
+        <item>Rechazado</item>
     </string-array>
 </resources>

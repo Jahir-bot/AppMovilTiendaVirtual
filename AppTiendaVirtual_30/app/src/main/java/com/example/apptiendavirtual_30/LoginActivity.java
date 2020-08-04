@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         editor.putString("name",mensajes.getObject().getName());
                         editor.putString("id",String.valueOf(mensajes.getObject().getId()));
                         editor.putString("phone",mensajes.getObject().getPhone());
+                        editor.putString("typeUser",mensajes.getObject().getTypeUser());
                         editor.apply();
                         Intent menu = new Intent(this, MainActivity.class);
                         startActivity(menu);

@@ -12,12 +12,13 @@
 
         <TableLayout
             android:layout_width="340dp"
-            android:layout_height="583dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="10dp"
             android:background="@android:color/background_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
+            app:layout_constraintTop_toBottomOf="@+id/spinner4">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -30,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Usuario"
+                    android:text="N° Pedido"
                     android:textColor="@android:color/background_light"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -41,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="Cliente"
+                    android:text="Total S/."
                     android:textColor="@android:color/background_light"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -59,24 +60,22 @@
 
             </TableRow>
 
-            <androidx.recyclerview.widget.RecyclerView android:layout_height="366dp">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPedidos"
+                android:layout_height="match_parent">
 
             </androidx.recyclerview.widget.RecyclerView>
 
         </TableLayout>
 
-        <TextView
-            android:id="@+id/textView"
+        <Spinner
+            android:id="@+id/spinner4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="72dp"
-            android:text="LISTADO DE PEDIDOS"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20dp"
-            android:textStyle="bold"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -15,14 +15,17 @@
 
         <TextView
             android:id="@+id/tvDescripcionProducto"
-            android:layout_width="0dp"
+            android:layout_width="102dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
+            android:layout_marginEnd="220dp"
+            android:layout_marginTop="20dp"
+            android:inputType="textMultiLine"
             android:text="982165428"
+            android:textAlignment="center"
             android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,22 +33,20 @@
             android:id="@+id/tvUnidad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="150dp"
             android:text="Stefany Ponce"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tvDescripcionProducto"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/btnVerPedido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginEnd="15dp"
             android:text="Vi"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toEndOf="@+id/tvUnidad"
             app:layout_constraintTop_toTopOf="parent"></Button>
 
 

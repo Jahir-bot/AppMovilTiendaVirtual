@@ -144,6 +144,7 @@ public class DetalleCatalogoActivity extends AppCompatActivity implements View.O
                     SharedPreferences.Editor editor = carrito.edit();
                     editor.putString("listDetallePedido",jsonListObjetos);
                     editor.apply();
+                    Toast.makeText(this,"Su producto: "+producto.getNombre()+" fue añadido correctamente",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(this, MainActivity.class));
                     finish();
 

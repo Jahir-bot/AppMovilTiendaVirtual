@@ -41,6 +41,7 @@ public class CatalogoAdapter extends RecyclerView.Adapter<CatalogoAdapter.ViewHo
 
     public void addCatalogo(ArrayList<Producto> lstProducto)
     {
+        listProducto.clear();
         listProducto.addAll(lstProducto);
         notifyDataSetChanged();
     }
