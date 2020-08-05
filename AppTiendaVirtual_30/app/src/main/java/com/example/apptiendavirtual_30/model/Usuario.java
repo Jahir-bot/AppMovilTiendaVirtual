@@ -1,6 +1,9 @@
 package com.example.apptiendavirtual_30.model;
 
-public class Usuario {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Usuario implements Parcelable {
 
     private Integer id;
     private String name;
@@ -12,6 +15,11 @@ public class Usuario {
 
     public Usuario(String name)
     {
+        this.name = name;
+    }
+    public Usuario(int id, String name)
+    {
+        this.id = id;
         this.name = name;
     }
     public Usuario(int id)
@@ -32,6 +40,32 @@ public class Usuario {
         this.phone = phone;
         this.password = password;
     }
+
+    protected Usuario(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        name = in.readString();
+        lastname = in.readString();
+        phone = in.readString();
+        password = in.readString();
+        address = in.readString();
+        typeUser = in.readString();
+    }
+
+    public static final Creator<Usuario> CREATOR = new Creator<Usuario>() {
+        @Override
+        public Usuario createFromParcel(Parcel in) {
+            return new Usuario(in);
+        }
+
+        @Override
+        public Usuario[] newArray(int size) {
+            return new Usuario[size];
+        }
+    };
 
     public Integer getId() {
         return id;
@@ -106,5 +140,26 @@ public class Usuario {
                 ", address='" + address + '\'' +
                 ", typeUser='" + typeUser + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        if (id == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(id);
+        }
+        dest.writeString(name);
+        dest.writeString(lastname);
+        dest.writeString(phone);
+        dest.writeString(password);
+        dest.writeString(address);
+        dest.writeString(typeUser);
     }
 }

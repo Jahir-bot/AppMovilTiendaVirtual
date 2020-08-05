@@ -15,6 +15,24 @@ public class Producto implements Parcelable {
     private String descripcion;
     private String enlaceImagen;
 
+    @Override
+    public String toString() {
+        return "Producto{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", categoria='" + categoria + '\'' +
+                ", costoUnitario=" + costoUnitario +
+                ", stock=" + stock +
+                ", descripcion='" + descripcion + '\'' +
+                ", enlaceImagen='" + enlaceImagen + '\'' +
+                '}';
+    }
+
+    public Producto(String nombre)
+    {
+        this.nombre = nombre;
+    }
+
     public Producto(int id, String nombre, String categoria, double costoUnitario, int stock, String enlaceImagen)
     {
         this.id = id;

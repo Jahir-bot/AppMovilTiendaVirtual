@@ -11,7 +11,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        final Intent menu = new Intent(this, LoginActivity.class);
+        final Intent menu = new Intent(this, EligeAutentificacion.class);
         Thread timer = new Thread(){
             @Override
             public void run() {

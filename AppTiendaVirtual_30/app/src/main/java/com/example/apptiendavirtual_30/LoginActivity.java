@@ -11,18 +11,22 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apptiendavirtual_30.model.DetallePedido;
 import com.example.apptiendavirtual_30.model.Mensajes;
 import com.example.apptiendavirtual_30.model.URI;
 import com.example.apptiendavirtual_30.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private Button btnInicioSesion, btnRegistrarse;
@@ -40,9 +44,38 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnRegistrarse.setOnClickListener(this);
 
         SharedPreferences preferences = getSharedPreferences("appBodega",MODE_PRIVATE);
-        if (preferences.contains("name") && preferences.contains("phone"))
+        SharedPreferences preferences1 = getSharedPreferences("appCarrito",MODE_PRIVATE);
+        String data = preferences1.getString("listDetallePedido","");
+        String name = preferences.getString("name","");
+        String phone = preferences.getString("phone","");
+        List<DetallePedido> listObjetos = new ArrayList<>();
+
+        if (data !=null)
+        {
+            try {
+                // String json = new Gson().toJson(jsonLisDetallePedido);
+                //  JSONArray jsonArray = new JSONArray(json);
+
+                //Convierte JSONArray a Lista de Objetos!
+                //Type listType = new TypeToken<ArrayList<DetallePedido>>(){}.getType();
+                listObjetos = new Gson().fromJson(data,
+                        new TypeToken<ArrayList<DetallePedido>>(){}.getType());
+
+            }catch (Exception e)
+            {
+
+            }
+
+        }
+        if (preferences.contains("name") && preferences.contains("phone") && listObjetos==null &&
+                !name.equals("usuario") && !phone.equals("Celular"))
         {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        }else if (preferences.contains("name") && preferences.contains("phone") && listObjetos.size()>0 &&
+                !name.equals("usuario") && !phone.equals("Celular")
+)
+        {
+            startActivity(new Intent(this,FormaPagoActivity.class));
         }
     }
 
@@ -82,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         editor.putString("phone",mensajes.getObject().getPhone());
                         editor.putString("typeUser",mensajes.getObject().getTypeUser());
                         editor.apply();
-                        Intent menu = new Intent(this, MainActivity.class);
+                        Intent menu = new Intent(this, LoginActivity.class);
                         startActivity(menu);
                         finish();
                     }else

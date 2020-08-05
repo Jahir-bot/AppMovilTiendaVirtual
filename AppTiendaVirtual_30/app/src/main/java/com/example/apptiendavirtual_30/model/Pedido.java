@@ -1,10 +1,14 @@
 package com.example.apptiendavirtual_30.model;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class Pedido implements Serializable {
+public class Pedido implements Parcelable {
 
     private int id;
     private String paymentType;
@@ -34,14 +38,75 @@ public class Pedido implements Serializable {
         this.details = details;
     }
 
-    public Pedido(String numberGenerated, double total, String name)
+    public Pedido (int cant, String name, double cost)
     {
+        this.details = new  DetallePedido(cant, name, cost);
+    }
+
+    public Pedido(int id, String paymentType, String dateEmision, String nameBanco,
+                  String codeVoucher, String state, String numberGenerated, double total, double subtotal,
+                  double igv, int id_user, String name)
+    {
+        this.paymentType = paymentType;
+        this.dateEmision = dateEmision;
+        this.nameBanco = nameBanco;
+        this.codeVoucher = codeVoucher;
+        this.state = state;
+        this.id = id;
         this.numberGenerated = numberGenerated;
         this.total = total;
-        this.user = new Usuario(name);
+        this.subtotal = subtotal;
+        this.igv = igv;
+        this.user = new Usuario(id_user, name);
+//        this.user = new Usuario(name);
     }
-    public Pedido(String numberGenerated, double total, int id_user)
+    public Pedido(int id, String paymentType, String dateEmision, String nameBanco,
+                  String codeVoucher, String state, double total, double subtotal,
+                  double igv, int id_user)
     {
+        this.id = id;
+        this.paymentType = paymentType;
+        this.dateEmision = dateEmision;
+        this.nameBanco = nameBanco;
+        this.codeVoucher = codeVoucher;
+        this.state = state;
+        this.total = total;
+        this.subtotal = subtotal;
+        this.igv = igv;
+        this.user = new Usuario(id_user);
+//        this.user = new Usuario(name);
+    }
+    public Pedido(int id, String paymentType, String dateEmision, String nameBanco,
+                  String codeVoucher, String state, String numberGenerated, double total, double subtotal,
+                  double igv, int id_user)
+    {
+        this.id = id;
+        this.paymentType = paymentType;
+        this.dateEmision = dateEmision;
+        this.nameBanco = nameBanco;
+        this.codeVoucher = codeVoucher;
+        this.state = state;
+        this.numberGenerated = numberGenerated;
+        this.total = total;
+        this.subtotal = subtotal;
+        this.igv = igv;
+        this.user = new Usuario(id_user);
+//        this.user = new Usuario(name);
+    }
+    public Pedido (int id, String state)
+    {
+        this.id = id;
+        this.state = state;
+    }
+    public Pedido(int id, String paymentType, String dateEmision, String nameBanco,
+                  String codeVoucher, String state, String numberGenerated, double total, int id_user)
+    {
+        this.paymentType = paymentType;
+        this.dateEmision = dateEmision;
+        this.nameBanco = nameBanco;
+        this.codeVoucher = codeVoucher;
+        this.state = state;
+        this.id = id;
         this.numberGenerated = numberGenerated;
         this.total = total;
         this.user = new Usuario(id_user);
@@ -51,6 +116,31 @@ public class Pedido implements Serializable {
         this.id = id;
         this.total = total;
     }
+
+    protected Pedido(Parcel in) {
+        id = in.readInt();
+        paymentType = in.readString();
+        dateEmision = in.readString();
+        nameBanco = in.readString();
+        codeVoucher = in.readString();
+        state = in.readString();
+        total = in.readDouble();
+        subtotal = in.readDouble();
+        igv = in.readDouble();
+        numberGenerated = in.readString();
+    }
+
+    public static final Creator<Pedido> CREATOR = new Creator<Pedido>() {
+        @Override
+        public Pedido createFromParcel(Parcel in) {
+            return new Pedido(in);
+        }
+
+        @Override
+        public Pedido[] newArray(int size) {
+            return new Pedido[size];
+        }
+    };
 
     public String getNumberGenerated() {
         return numberGenerated;
@@ -167,5 +257,24 @@ public class Pedido implements Serializable {
                 ", igv=" + igv +
                 ", user=" + user +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(paymentType);
+        dest.writeString(dateEmision);
+        dest.writeString(nameBanco);
+        dest.writeString(codeVoucher);
+        dest.writeString(state);
+        dest.writeDouble(total);
+        dest.writeDouble(subtotal);
+        dest.writeDouble(igv);
+        dest.writeString(numberGenerated);
     }
 }

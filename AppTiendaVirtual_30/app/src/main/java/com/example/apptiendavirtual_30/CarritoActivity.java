@@ -82,8 +82,19 @@ public class CarritoActivity extends AppCompatActivity {
             btnCompra.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(v.getContext(),FormaPagoActivity.class));
-                    finish();
+                    SharedPreferences preferences = getSharedPreferences("appBodega",MODE_PRIVATE);
+                    String name = preferences.getString("name","");
+                    String phone = preferences.getString("phone","");
+                    if (name.equals("") && phone.equals(""))
+                    {
+                        startActivity(new Intent(CarritoActivity.this, LoginActivity.class));
+                        finish();
+                    }else
+                    {
+                        startActivity(new Intent(v.getContext(),FormaPagoActivity.class));
+                        finish();
+                    }
+
                 }
             });
     }

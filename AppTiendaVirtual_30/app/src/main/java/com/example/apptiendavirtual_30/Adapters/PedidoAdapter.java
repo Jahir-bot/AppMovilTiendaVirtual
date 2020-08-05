@@ -1,6 +1,7 @@
 package com.example.apptiendavirtual_30.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.apptiendavirtual_30.Detalles.DetallePedidoActivity;
 import com.example.apptiendavirtual_30.R;
 import com.example.apptiendavirtual_30.model.DetallePedido;
 import com.example.apptiendavirtual_30.model.Pedido;
+import com.example.apptiendavirtual_30.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -61,6 +64,13 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
         holder.btnVerPedido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = pedido.getUser().getName();
+                Usuario usuario = new Usuario( pedido.getUser().getId(),pedido.getUser().getName());
+                System.out.println("Nombre Adapter: "+pedido.getUser().getName());
+                Intent intent = new Intent(context, DetallePedidoActivity.class);
+                intent.putExtra("listaPedido",pedido);
+                intent.putExtra("name",usuario);
+                context.startActivity(intent);
 
             }
         });

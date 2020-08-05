@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Button;
+import android.widget.Checkable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         View header = ((NavigationView)findViewById(R.id.nav_view)).getHeaderView(0);
         ((TextView)header.findViewById(R.id.txtMenuUser)).setText(preferences.getString("name","usuario"));
         ((TextView)header.findViewById(R.id.txtMenuPhone)).setText(preferences.getString("phone","Celular"));
+        
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -71,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
                 R.id.stockFragment,R.id.catalogoFragment,R.id.pedidosFragment)
                 .setDrawerLayout(drawer)
                 .build();
+
+
+
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);

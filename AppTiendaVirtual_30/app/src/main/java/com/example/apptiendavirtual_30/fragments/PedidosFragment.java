@@ -160,13 +160,20 @@ public class PedidosFragment extends Fragment {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                                     lstPedido.add(new Pedido(
+                                            jsonObject.getInt("id"),
+                                            jsonObject.getString("paymentType"),
+                                            jsonObject.getString("dateEmision"),
+                                            jsonObject.getString("nameBanco"),
+                                            jsonObject.getString("codeVoucher"),
+                                            jsonObject.getString("state"),
                                             jsonObject.getString("numberGenerated"),
                                             jsonObject.getDouble("total"),
-                                            jsonObject.getJSONObject("user").getInt("id")
+                                            jsonObject.getDouble("subtotal"),
+                                            jsonObject.getDouble("igv"),
+                                            jsonObject.getJSONObject("user").getInt("id"),
+                                            jsonObject.getJSONObject("user").getString("name")
 
                                     ));
-
-
 
                                             for (int e=0;e<lstPedido.size();e++)
                                             {
@@ -176,9 +183,6 @@ public class PedidosFragment extends Fragment {
                                                     System.out.println("New Data: "+lstPedido);
                                                 }
                                             }
-
-
-
 
 
                                 }
@@ -217,8 +221,17 @@ public class PedidosFragment extends Fragment {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
 
                                     lstPedido.add(new Pedido(
+                                            jsonObject.getInt("id"),
+                                            jsonObject.getString("paymentType"),
+                                            jsonObject.getString("dateEmision"),
+                                            jsonObject.getString("nameBanco"),
+                                            jsonObject.getString("codeVoucher"),
+                                            jsonObject.getString("state"),
                                             jsonObject.getString("numberGenerated"),
                                             jsonObject.getDouble("total"),
+                                            jsonObject.getDouble("subtotal"),
+                                            jsonObject.getDouble("igv"),
+                                            jsonObject.getJSONObject("user").getInt("id"),
                                             jsonObject.getJSONObject("user").getString("name")
                                     ));
                                 }
