@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private TextView txtMenuUser;
+    Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +42,24 @@ public class MainActivity extends AppCompatActivity {
         View header = ((NavigationView)findViewById(R.id.nav_view)).getHeaderView(0);
         ((TextView)header.findViewById(R.id.txtMenuUser)).setText(preferences.getString("name","usuario"));
         ((TextView)header.findViewById(R.id.txtMenuPhone)).setText(preferences.getString("phone","Celular"));
+
+        String typeUser = preferences.getString("typeUser","");
+        String user = preferences.getString("name","usuario");
         
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         FloatingActionButton btnVerificaCarrito = (FloatingActionButton)findViewById(R.id.btnVerificaCarrito);
+        if (typeUser.equals("Admin"))
+        {
+            btnVerificaCarrito.setVisibility(View.GONE);
+        }
         btnVerificaCarrito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                SharedPreferences preferences = getSharedPreferences("appCarrito",MODE_PRIVATE);
-               System.out.println("AQUI PE CAUSA "+preferences.getString("listDetallePedido",""));
+
 
 
                 if (!preferences.getString("listDetallePedido","").equals(""))
@@ -59,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(v.getContext(),CarritoActivity.class));
                 }else
                 {
-                    Toast.makeText(v.getContext(),"Compra pe causa",Toast.LENGTH_LONG).show();
+                    Toast.makeText(v.getContext(),"Agregue 1 producto al carrito como mínimo",Toast.LENGTH_LONG).show();
                 }
                 //startActivity(new Intent(v.getContext(),CarritoActivity.class));
             }
@@ -67,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        navigationView.setItemIconTintList(null);
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -74,6 +85,23 @@ public class MainActivity extends AppCompatActivity {
                 .setDrawerLayout(drawer)
                 .build();
 
+        menu = navigationView.getMenu();
+        if (!preferences.contains("name"))
+        {
+            MenuItem menuItem1 = menu.findItem(R.id.pedidosFragment);
+            menuItem1.setVisible(false);
+        }
+
+        if (typeUser.equals("Cliente") || typeUser.equals("") ) {
+
+            MenuItem menuItem = menu.findItem(R.id.stockFragment);
+            menuItem.setVisible(false);
+        }else
+        {
+            menu = navigationView.getMenu();
+            MenuItem menuItem = menu.findItem(R.id.stockFragment);
+            menuItem.setVisible(true);
+        }
 
 
 

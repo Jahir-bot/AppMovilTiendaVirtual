@@ -40,7 +40,7 @@ public class Pedido implements Parcelable {
 
     public Pedido (int cant, String name, double cost)
     {
-        this.details = new  DetallePedido(cant, name, cost);
+        this.details = (List<DetallePedido>) new  DetallePedido(cant, name, cost);
     }
 
     public Pedido(int id, String paymentType, String dateEmision, String nameBanco,

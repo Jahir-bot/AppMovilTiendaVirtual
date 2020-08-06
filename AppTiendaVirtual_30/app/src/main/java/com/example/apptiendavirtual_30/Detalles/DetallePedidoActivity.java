@@ -55,7 +55,8 @@ public class DetallePedidoActivity extends AppCompatActivity implements View.OnC
     Pedido pedido = new Pedido();
     Usuario usuario = new Usuario();
     private Button btnConfirmar, btnRechazar, btnPreparar;
-    private TextView tvNumeroPedido, tvFecha, tvUnidad, tvPagoTotal, tvTipoPago, tvNroOperacion;
+    private TextView tvNumeroPedido, tvFecha, tvUnidad, tvPagoTotal, tvTipoPago, tvNroOperacion, textView18
+            ,textView;
     private RecyclerView rvDetallePedido;
     private DetallePedidoAdapter detallePedidoAdapter;
     private ArrayList<DetallePedido> listPedido;
@@ -76,6 +77,8 @@ public class DetallePedidoActivity extends AppCompatActivity implements View.OnC
         btnConfirmar = findViewById(R.id.btnConfirmar);
         btnRechazar = findViewById(R.id.btnRechazar);
         btnPreparar = findViewById(R.id.btnPreparar);
+        textView18 = findViewById(R.id.textView18);
+        textView = findViewById(R.id.textView);
         btnConfirmar.setOnClickListener(this);
         btnRechazar.setOnClickListener(this);
         btnPreparar.setOnClickListener(this);
@@ -116,9 +119,37 @@ public class DetallePedidoActivity extends AppCompatActivity implements View.OnC
 
         if (!typeUser.equals("Cliente"))
         {
-            btnPreparar.setVisibility(View.VISIBLE);
+           /* btnPreparar.setVisibility(View.VISIBLE);
             btnRechazar.setVisibility(View.VISIBLE);
-            btnConfirmar.setVisibility(View.VISIBLE);
+            btnConfirmar.setVisibility(View.VISIBLE);*/
+            if (pedido.getState().equals("Pendiente"))
+            {
+                btnPreparar.setVisibility(View.VISIBLE);
+                btnRechazar.setVisibility(View.VISIBLE);
+                btnConfirmar.setVisibility(View.GONE);
+            }else if (pedido.getState().equals("Confirmado"))
+            {
+                btnPreparar.setVisibility(View.GONE);
+                btnRechazar.setVisibility(View.GONE);
+                btnConfirmar.setVisibility(View.GONE);
+                textView.setText("Pedido Confirmado");
+            }else if (pedido.getState().equals("Preparando"))
+            {
+                btnPreparar.setVisibility(View.GONE);
+                btnRechazar.setVisibility(View.GONE);
+                btnConfirmar.setVisibility(View.VISIBLE);
+                textView.setText("Pedido en Proceso");
+            }else if (pedido.getState().equals("Rechazado"))
+            {
+                btnPreparar.setVisibility(View.GONE);
+                btnRechazar.setVisibility(View.GONE);
+                btnConfirmar.setVisibility(View.GONE);
+                textView.setText("Pedido Rechazado");
+            }else if (pedido.getPaymentType().equals("Efectivo"))
+            {
+                textView18.setVisibility(View.GONE);
+                tvNroOperacion.setVisibility(View.GONE);
+            }
         }
 
     }
@@ -191,8 +222,8 @@ public class DetallePedidoActivity extends AppCompatActivity implements View.OnC
                         pedido.getNameBanco(),pedido.getCodeVoucher(),status,pedido.getTotal(),pedido.getSubtotal(),
                         pedido.getIgv(),usuario.getId());
                 actualizarPedido(pedidos);
-             /*   startActivity(new Intent(this, PedidosFragment.class));
-                finish();*/
+             /*   startActivity(new Intent(this, PedidosFragment.class));*/
+                finish();
             }break;
             case R.id.btnRechazar:{
                 String status = "Rechazado";
@@ -200,8 +231,8 @@ public class DetallePedidoActivity extends AppCompatActivity implements View.OnC
                         pedido.getNameBanco(),pedido.getCodeVoucher(),status,pedido.getTotal(),pedido.getSubtotal(),
                         pedido.getIgv(),usuario.getId());
                 actualizarPedido(pedidos);
-               /* startActivity(new Intent(this, PedidosFragment.class));
-                finish();*/
+               /* startActivity(new Intent(this, PedidosFragment.class));*/
+                finish();
             }break;
         }
     }

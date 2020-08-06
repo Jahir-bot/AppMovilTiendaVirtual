@@ -102,17 +102,35 @@ public class DetalleCatalogoActivity extends AppCompatActivity implements View.O
                 String jsonLisDetallePedido = carrito.getString("listDetallePedido",null);
 
                 List<DetallePedido> listObjetos = new ArrayList<>();
+                List<DetallePedido> detallePedidos = new ArrayList<>();
 
                 if (jsonLisDetallePedido !=null)
                 {
                     try {
+
+
+                        /*detallePedidos = new Gson().fromJson(jsonLisDetallePedido,
+                                new TypeToken<ArrayList<DetallePedido>>(){}.getType());
+
+                        for (int i=0;i<detallePedidos.size();i++)
+                        {
+                            DetallePedido pedido = detallePedidos.get(i);
+                            if (pedido.getProduct().getId()==producto.getId())
+                            {
+                                int can=  pedido.getCant()+cantidad;
+                                pedido.setCant(can);
+                                detallePedidos.add(pedido);
+                            }
+                        }*/
+
                        // String json = new Gson().toJson(jsonLisDetallePedido);
                       //  JSONArray jsonArray = new JSONArray(json);
 
                         //Convierte JSONArray a Lista de Objetos!
                         //Type listType = new TypeToken<ArrayList<DetallePedido>>(){}.getType();
+
                         listObjetos = new Gson().fromJson(jsonLisDetallePedido,
-                                new TypeToken<ArrayList<DetallePedido>>(){}.getType());
+                                        new TypeToken<ArrayList<DetallePedido>>(){}.getType());
 
                     }catch (Exception e)
                     {
@@ -138,6 +156,8 @@ public class DetalleCatalogoActivity extends AppCompatActivity implements View.O
                     listObjetos.add(detaPedido);
 
                     Gson g = new Gson();
+
+                    System.out.println("LISTA DE PEDIDOS:"+listObjetos);
 
                     String jsonListObjetos = g.toJson(listObjetos);
 

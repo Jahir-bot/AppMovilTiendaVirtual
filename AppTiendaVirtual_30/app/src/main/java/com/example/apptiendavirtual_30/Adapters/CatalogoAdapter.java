@@ -3,6 +3,7 @@ package com.example.apptiendavirtual_30.Adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.example.apptiendavirtual_30.model.Producto;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,6 +55,11 @@ public class CatalogoAdapter extends RecyclerView.Adapter<CatalogoAdapter.ViewHo
         holder.txtCantidad.setText(String.valueOf(producto.getStock()));
         holder.txtPrecio.setText(String.valueOf(producto.getCostoUnitario()));
         Picasso.get().load(producto.getEnlaceImagen()).into(holder.imgProducto);
+        SharedPreferences preferences = context.getSharedPreferences("appBodega",Context.MODE_PRIVATE);
+        if (preferences.getString("typeUser","").equals("Admin"))
+        {
+            holder.btnAgregar.setVisibility(View.GONE);
+        }
         holder.btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +67,7 @@ public class CatalogoAdapter extends RecyclerView.Adapter<CatalogoAdapter.ViewHo
                 Intent intent = new Intent(context, DetalleCatalogoActivity.class);
                 intent.putExtra("enlaceProducto",producto);
                 context.startActivity(intent);
+
 
 
             }

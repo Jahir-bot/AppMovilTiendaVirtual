@@ -247,41 +247,46 @@
             android:id="@+id/tvNroOperacion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginEnd="44dp"
             android:layout_marginTop="12dp"
             android:text="123456789"
             android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="@+id/tvPagoTotal"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/textView18"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTipoPago" />
 
         <Button
             android:id="@+id/btnConfirmar"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="44dp"
+            android:layout_marginEnd="44dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:text="Confirmar"
             android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnRechazar" />
+
+        <Button
+            android:id="@+id/btnRechazar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="44dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:text="Rechazar"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnPreparar" />
 
         <Button
-            android:id="@+id/btnRechazar"
-            android:layout_width="104dp"
+            android:id="@+id/btnPreparar"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="44dp"
-            android:layout_marginTop="10dp"
-            android:visibility="gone"
-            android:text="Rechazar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnPreparar" />
-
-        <Button
-            android:id="@+id/btnPreparar"
-            android:layout_width="104dp"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
             android:text="Preaparar"
             android:visibility="gone"
