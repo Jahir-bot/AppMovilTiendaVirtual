@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 public class PedidosFragment extends Fragment {
     private RecyclerView rvPedidos;
     private PedidoAdapter pedidoAdapter;
-    private ArrayList<Pedido> listaPedidos;
+    private ArrayList<Pedido> listPedido = new ArrayList<>();
     private RequestQueue requestQueue;
     private TextView textView4;
     private Spinner spinner4;
@@ -70,7 +71,7 @@ public class PedidosFragment extends Fragment {
         rvPedidos.setLayoutManager(new LinearLayoutManager(getContext()));
         pedidoAdapter = new PedidoAdapter(getContext());
         rvPedidos.setAdapter(pedidoAdapter);
-        listaPedidos= new ArrayList<>();
+        listPedido= new ArrayList<>();
         textView4 = view.findViewById(R.id.textView4);
         spinner4 = view.findViewById(R.id.spinner4);
         requestQueue = Volley.newRequestQueue(getContext());
@@ -152,9 +153,10 @@ public class PedidosFragment extends Fragment {
                         try {
 
                             JSONArray jsonArray = response.getJSONArray("list");
+                            ArrayList<Pedido> lstPedido = new ArrayList<>();
                             if (jsonArray.length()>0)
                             {
-                                ArrayList<Pedido> lstPedido = new ArrayList<>();
+
                                 for (int i=0;i<jsonArray.length();i++)
                                 {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -187,6 +189,9 @@ public class PedidosFragment extends Fragment {
 
                                 }
                                 pedidoAdapter.listaPedido(lstPedido,true);
+                            } else
+                            {
+                                pedidoAdapter.listaPedido(lstPedido,true);
                             }
                         }catch (JSONException e)
                         {
@@ -213,9 +218,10 @@ public class PedidosFragment extends Fragment {
                         try {
 
                             JSONArray jsonArray = response.getJSONArray("list");
+                            ArrayList<Pedido> lstPedido = new ArrayList<>();
                             if (jsonArray.length()>0)
                             {
-                                ArrayList<Pedido> lstPedido = new ArrayList<>();
+
                                 for (int i=0;i<jsonArray.length();i++)
                                 {
                                     JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -235,6 +241,12 @@ public class PedidosFragment extends Fragment {
                                             jsonObject.getJSONObject("user").getString("name")
                                     ));
                                 }
+                                pedidoAdapter.listaPedido(lstPedido,false);
+
+                                System.out.println("2da lista: "+lstPedido);
+                            }
+                            else
+                            {
                                 pedidoAdapter.listaPedido(lstPedido,false);
                             }
                         }catch (JSONException e)

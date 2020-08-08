@@ -16,5 +16,9 @@
             android:id="@+id/pedidosFragment"
             android:icon="@drawable/ic_pedidos"
             android:title="Pedidos" />
+        <item
+            android:id="@+id/registrarAdminFragment"
+            android:icon="@drawable/ic_anadir"
+            android:title="Crear Admin" />
     </group>
 </menu>

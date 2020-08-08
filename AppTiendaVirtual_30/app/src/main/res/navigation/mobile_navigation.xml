@@ -19,4 +19,9 @@
         android:name="com.example.apptiendavirtual_30.fragments.PedidosFragment"
         android:label="Lista de Pedidos"
         tools:layout="@layout/fragment_pedidos" />
+    <fragment
+        android:id="@+id/registrarAdminFragment"
+        android:name="com.example.apptiendavirtual_30.fragments.RegistrarAdminFragment"
+        android:label="Creación de Administrador"
+        tools:layout="@layout/fragment_registrar_admin" />
 </navigation>

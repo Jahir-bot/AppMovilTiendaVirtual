@@ -51,7 +51,8 @@ public class RegistroActivity extends AppCompatActivity implements View.OnClickL
                 }else if (txtApellido.getText().toString().equals(""))
                 {
                     txtApellido.setError("Ingrese su Apellido");
-                }else if (txtCelular.getText().toString().equals("") || txtCelular.getText().toString().length()>9)
+                }else if (txtCelular.getText().toString().equals("") || txtCelular.getText().toString().length()>9
+                        || txtCelular.getText().toString().length()<9)
                 {
                     txtCelular.setError("Ingrese un Celular de 9 dígitos");
                 }else if (txtContraRegistro.getText().toString().equals("")

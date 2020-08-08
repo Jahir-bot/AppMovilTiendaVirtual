@@ -67,15 +67,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
 
         }
-        if (preferences.contains("name") && preferences.contains("phone") && listObjetos==null &&
-                !name.equals("usuario") && !phone.equals("Celular"))
+        if (preferences.contains("name") && preferences.contains("phone") && listObjetos==null)
         {
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
         }else if (preferences.contains("name") && preferences.contains("phone") && listObjetos.size()>0 &&
                 !name.equals("usuario") && !phone.equals("Celular")
-)
+                && preferences1.getString("carrito","").equals("true"))
         {
             startActivity(new Intent(this,FormaPagoActivity.class));
+        }else if (preferences.contains("name") && preferences.contains("phone") && listObjetos.size()>0 &&
+                !name.equals("usuario") && !phone.equals("Celular")
+                && preferences1.getString("carrito","").equals("false"))
+        {
+            startActivity(new Intent(this,MainActivity.class));
+        }
+        else if (preferences.contains("name") && preferences.contains("phone") && listObjetos.size()==0 &&
+                !name.equals("usuario") && !phone.equals("Celular")
+                && preferences1.getString("carrito","").equals("false"))
+        {
+            startActivity(new Intent(this,MainActivity.class));
         }
     }
 

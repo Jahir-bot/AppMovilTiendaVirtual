@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.stockFragment,R.id.catalogoFragment,R.id.pedidosFragment)
+                R.id.stockFragment,R.id.catalogoFragment,R.id.pedidosFragment, R.id.registrarAdminFragment)
                 .setDrawerLayout(drawer)
                 .build();
 
@@ -96,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
             MenuItem menuItem = menu.findItem(R.id.stockFragment);
             menuItem.setVisible(false);
+            MenuItem item = menu.findItem(R.id.registrarAdminFragment);
+            item.setVisible(false);
         }else
         {
             menu = navigationView.getMenu();

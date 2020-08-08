@@ -1,6 +1,7 @@
 package com.example.apptiendavirtual_30.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +11,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.apptiendavirtual_30.CarritoActivity;
 import com.example.apptiendavirtual_30.R;
 import com.example.apptiendavirtual_30.model.DetallePedido;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import androidx.annotation.NonNull;
@@ -49,15 +52,16 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull CarritoAdapter.ViewHolder holder, final int position) {
         final DetallePedido detallePedido = listDetallePedido.get(position);
+        DecimalFormat decimalFormat = new DecimalFormat(".00");
         holder.txtProducto.setText(detallePedido.getProduct().getNombre());
         holder.txtUnidades.setText(String.valueOf(detallePedido.getCant()));
-        holder.txtCosto.setText(String.valueOf(detallePedido.getCant()*detallePedido.getCost()));
+        holder.txtCosto.setText(String.valueOf(decimalFormat.format(detallePedido.getCant()*detallePedido.getCost())));
         Picasso.get().load(detallePedido.getProduct().getEnlaceImagen()).into(holder.imgProducto);
         holder.btnEliminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listDetallePedido.remove(position);
-                Toast.makeText(context,"CLICL EN EL BUTTON DELETE",Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Producto Eliminado",Toast.LENGTH_SHORT).show();
                 System.out.println("AQUI LA DATA:"+listDetallePedido);
                 SharedPreferences.Editor editor = context.getSharedPreferences("appCarrito",Context.MODE_PRIVATE).edit();
 
@@ -67,6 +71,8 @@ public class CarritoAdapter extends RecyclerView.Adapter<CarritoAdapter.ViewHold
                 editor.putString("listDetallePedido",jsonListObjetos);
                 editor.apply();
                 notifyDataSetChanged();
+                ((CarritoActivity)context).finish();
+                context.startActivity(new Intent(context,CarritoActivity.class));
             }
         });
     }

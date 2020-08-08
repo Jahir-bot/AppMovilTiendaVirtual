@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.apptiendavirtual_30.Detalles.DetallePedidoActivity;
 import com.example.apptiendavirtual_30.R;
@@ -48,10 +49,16 @@ public class PedidoAdapter extends RecyclerView.Adapter<PedidoAdapter.ViewHolder
         listPedido.addAll(lstPedido);
         notifyDataSetChanged();
         this.typeUser = typeUser;
+        if (listPedido.size()==0)
+        {
+            Toast.makeText(context,"Aún no cuenta con pedidos",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull PedidoAdapter.ViewHolder holder, int position) {
+        System.out.println("TAMAÑO DE LISTA: "+listPedido.size());
         final Pedido pedido = listPedido.get(position);
         holder.tvDescripcionProducto.setText(String.valueOf(pedido.getNumberGenerated()));
         if (typeUser==false)

@@ -102,26 +102,12 @@ public class DetalleCatalogoActivity extends AppCompatActivity implements View.O
                 String jsonLisDetallePedido = carrito.getString("listDetallePedido",null);
 
                 List<DetallePedido> listObjetos = new ArrayList<>();
-                List<DetallePedido> detallePedidos = new ArrayList<>();
+
+                int can2=0;
 
                 if (jsonLisDetallePedido !=null)
                 {
                     try {
-
-
-                        /*detallePedidos = new Gson().fromJson(jsonLisDetallePedido,
-                                new TypeToken<ArrayList<DetallePedido>>(){}.getType());
-
-                        for (int i=0;i<detallePedidos.size();i++)
-                        {
-                            DetallePedido pedido = detallePedidos.get(i);
-                            if (pedido.getProduct().getId()==producto.getId())
-                            {
-                                int can=  pedido.getCant()+cantidad;
-                                pedido.setCant(can);
-                                detallePedidos.add(pedido);
-                            }
-                        }*/
 
                        // String json = new Gson().toJson(jsonLisDetallePedido);
                       //  JSONArray jsonArray = new JSONArray(json);
@@ -132,6 +118,16 @@ public class DetalleCatalogoActivity extends AppCompatActivity implements View.O
                         listObjetos = new Gson().fromJson(jsonLisDetallePedido,
                                         new TypeToken<ArrayList<DetallePedido>>(){}.getType());
 
+                        for (int i=0;i<listObjetos.size();i++)
+                        {
+                            DetallePedido pedido = listObjetos.get(i);
+                            if (pedido.getProduct().getId()==producto.getId())
+                            {
+                                can2 = pedido.getCant();
+                                listObjetos.remove(i);
+                            }
+                        }
+
                     }catch (Exception e)
                     {
 
@@ -139,7 +135,7 @@ public class DetalleCatalogoActivity extends AppCompatActivity implements View.O
 
                 }
 
-                    int cantidadPedido = Integer.parseInt(txtDetaIncrement.getText().toString());
+                    int cantidadPedido = Integer.parseInt(txtDetaIncrement.getText().toString())+can2;
 
                     String nombre = txtProducto.getText().toString();
                     String url = producto.getEnlaceImagen();
@@ -163,6 +159,7 @@ public class DetalleCatalogoActivity extends AppCompatActivity implements View.O
 
                     SharedPreferences.Editor editor = carrito.edit();
                     editor.putString("listDetallePedido",jsonListObjetos);
+                    editor.putString("carrito","false");
                     editor.apply();
                     Toast.makeText(this,"Su producto: "+producto.getNombre()+" fue añadido correctamente",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(this, MainActivity.class));
