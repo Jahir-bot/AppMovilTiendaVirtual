@@ -27,9 +27,15 @@ public class Producto implements Parcelable {
                 ", enlaceImagen='" + enlaceImagen + '\'' +
                 '}';
     }
-
-    public Producto(String nombre)
+    public Producto(int id, int stock)
     {
+        this.id = id;
+        this.stock = stock;
+    }
+
+    public Producto(int id, String nombre)
+    {
+        this.id = id;
         this.nombre = nombre;
     }
 

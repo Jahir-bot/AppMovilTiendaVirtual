@@ -27,10 +27,10 @@ public class DetallePedido implements Serializable {
         this.cost = cost;
     }
 
-    public DetallePedido(int cant, String name, double cost)
+    public DetallePedido(int cant, int id , String name, double cost)
     {
         this.cant = cant;
-        this. product = new Producto(name);
+        this. product = new Producto(id, name);
         this.cost = cost;
     }
 

@@ -31,11 +31,13 @@ import com.example.apptiendavirtual_30.Adapters.DetallePedidoAdapter;
 import com.example.apptiendavirtual_30.R;
 import com.example.apptiendavirtual_30.fragments.PedidosFragment;
 import com.example.apptiendavirtual_30.model.DetallePedido;
+import com.example.apptiendavirtual_30.model.Mensajes;
 import com.example.apptiendavirtual_30.model.Pedido;
 import com.example.apptiendavirtual_30.model.URI;
 import com.example.apptiendavirtual_30.model.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -62,6 +64,7 @@ public class DetallePedidoActivity extends AppCompatActivity implements View.OnC
     private ArrayList<DetallePedido> listPedido;
     private RequestQueue requestQueue;
     private String urlBase="/order/", typeUser;
+    public static final String url_base="/order/update/stock";
     private int id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,6 +182,7 @@ public class DetallePedidoActivity extends AppCompatActivity implements View.OnC
 
                                     listPedido.add(new DetallePedido(
                                             jsonObject1.getInt("cant"),
+                                            jsonObject1.getJSONObject("product").getInt("id"),
                                             jsonObject1.getJSONObject("product").getString("name"),
                                             jsonObject1.getDouble("cost")
                                     ));
@@ -212,7 +216,11 @@ public class DetallePedidoActivity extends AppCompatActivity implements View.OnC
                 Pedido pedidos = new Pedido(pedido.getId(),pedido.getPaymentType(),pedido.getDateEmision(),
                         pedido.getNameBanco(),pedido.getCodeVoucher(),status,pedido.getTotal(),pedido.getSubtotal(),
                         pedido.getIgv(),usuario.getId());
+
+                System.out.println("Aqui la data:"+listPedido);
                 actualizarPedido(pedidos);
+                actualizarStock(listPedido);
+
               /*  startActivity(new Intent(this, PedidosFragment.class));*/
                 finish();
             }break;
@@ -235,6 +243,56 @@ public class DetallePedidoActivity extends AppCompatActivity implements View.OnC
                 finish();
             }break;
         }
+    }
+
+    public static Mensajes actualizarStock(ArrayList<DetallePedido> listPedido)
+    {
+        Mensajes mensajes = new Mensajes();
+
+        try {
+            URI uri = new URI();
+            URL url = new URL(uri.getUrl()+url_base);
+            HttpURLConnection conn= (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type","application/json");
+            conn.setDoOutput(true);
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+            Gson g = new Gson();
+
+            String input = g.toJson(listPedido,new TypeToken<ArrayList<DetallePedido>>(){}.getType() );
+
+            System.out.println("SE IMPRIME EL INPUT: "+input);
+
+
+            OutputStream os = conn.getOutputStream();
+            os.write(input.getBytes());
+            os.flush();
+
+            if(conn.getResponseCode() !=200)
+            {
+                throw new RuntimeException("Error de Conexion"+conn.getResponseCode());
+            }
+
+            BufferedReader tecla2 = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+
+            StringBuilder respuesta = new StringBuilder();
+
+            String out;
+
+            while((out=tecla2.readLine())!=null)
+            {
+                respuesta.append(out);
+            }
+
+            mensajes =g.fromJson(respuesta.toString(), Mensajes.class);
+            conn.disconnect();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return mensajes;
     }
 
     public Pedido actualizarPedido(Pedido pedido)

@@ -37,7 +37,7 @@ public class StockFragment extends Fragment {
     private StockAdapter stockAdapter;
     private RequestQueue requestQueue;
     private ArrayList<Producto> listaProductos;
-    private String urlBase = "/product/stock_low?numberMin=11";
+    private String urlBase = "/product/stock_low?numberMin=9";
     private TextView textView3;
     public StockFragment() {
         // Required empty public constructor

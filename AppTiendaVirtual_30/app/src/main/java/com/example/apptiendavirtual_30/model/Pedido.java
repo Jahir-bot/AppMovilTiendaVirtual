@@ -38,9 +38,9 @@ public class Pedido implements Parcelable {
         this.details = details;
     }
 
-    public Pedido (int cant, String name, double cost)
+    public Pedido (int cant,int id, String name, double cost)
     {
-        this.details = (List<DetallePedido>) new  DetallePedido(cant, name, cost);
+        this.details = (List<DetallePedido>) new  DetallePedido(cant,id, name, cost);
     }
 
     public Pedido(int id, String paymentType, String dateEmision, String nameBanco,

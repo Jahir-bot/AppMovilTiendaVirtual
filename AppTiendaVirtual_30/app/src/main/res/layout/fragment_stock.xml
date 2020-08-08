@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Código"
+                android:text="Producto"
                 android:textColor="@android:color/background_light"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Descripción"
+                android:text="Stock"
                 android:textColor="@android:color/background_light"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -52,7 +52,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Stock"
+                android:text="Añadir"
+                android:textColor="@android:color/background_light"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/textView14"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Acción"
                 android:textColor="@android:color/background_light"
                 android:textSize="18sp"
                 android:textStyle="bold" />
